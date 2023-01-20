@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-
     var $file = '../../assets';
 
     private $arrayOutfits = array(
@@ -98,7 +97,6 @@ class DatabaseSeeder extends Seeder
             $o->save();
         }
     }
-
     
 
     private function seedUsers(){

@@ -43,15 +43,7 @@ Route::post('/sanctum/token', function(Request $request) {
     return $user->createToken($request->email)->plainTextToken;
 });
 
-
-// Route::get('outfits', OutfitController::class . '@index');
 Route::post('login', [LoginController::class, 'login']);
-
-// Router::group(['middleware' => ['web']], function () {
-//     Route::get('outfits', OutfitController::class . '@index');
-//     Route::post('login', [LoginController::class, 'login']);
-// });
-
 
 //Auth sanctum
 Route::group(['middleware' => 'auth:sanctum'], function() {
