@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-//Con esto ya no me da el error, pero no se si está bien 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 //Sanctum
@@ -63,15 +62,8 @@ class LoginController extends Controller
             // Authentication passed...
             //Generate users session
             //$request->session()->regenerate();
-            //$request->session()->regenerate();
 
             $token = $request->user()->createToken('token')->plainTextToken;
-            //$token2 = auth()->user()->createToken('token')->plainTextToken;
-            //$token3 = auth()->user()->createToken('auth_token')->plainTextToken;
-            // if (!$token = auth('api')->attempt($credentials)) {
-            //     return response()->json(['error' => 'Unauthorized'], 401);
-            // }
-
             $data = [
                 "status" => 200,
                 "data" => [
@@ -81,7 +73,6 @@ class LoginController extends Controller
                 ]
             ];
             return response()->json($data, 200);
-            //return redirect()->intended('dashboard');
         }else{
             return response()->json(['message' => 'Login incorrecto'], 401);
         }
