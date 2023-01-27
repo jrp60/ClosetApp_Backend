@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -41,10 +43,38 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
+    //TODO - Check
+    //it generates token?
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+         $user = $this->create($request->all());
+
+
+
+        $this->guard()->login($user); //what does this? is needed?
+        $token = $user->createToken('token')->plainTextToken;
+        
+        $data = [
+            "status" => 200,
+            "data" => [
+                'message' => 'Sign up successful',
+                'user' => $user,
+                'token' => $token,
+            ]
+        ];
+        return response()->json($data, 200);
+
+        // return $this->registered($request, $user) ?: redirect($this->redirectPath());
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
+     * TODO - Delete 'confirmed' to test with postman
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)

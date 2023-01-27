@@ -54,6 +54,22 @@ class LoginController extends Controller
         $response->assertOk();
     }
 
+    // public function token(Request $request)
+    // {
+    //     $credentials = $request->only('email', 'password');
+
+    //     if (Auth::attempt($credentials)) {
+    //         // Authentication passed...
+    //         //Generate users session
+    //         //$request->session()->regenerate();
+
+    //         $token = $request->user()->createToken('token')->plainTextToken;
+    //         return response()->json($data, 200);
+    //     }else{
+    //         return response()->json(['message' => 'Login incorrecto'], 401);
+    //     }
+    // }
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');

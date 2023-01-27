@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OutfitController;
 use App\Http\Controllers\UserOutfitController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 //sanctum
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//TODO - Comment this and check if it works
 Route::post('/sanctum/token', function(Request $request) {
     $request->validate([
         'email' => 'required|email',
@@ -43,7 +45,10 @@ Route::post('/sanctum/token', function(Request $request) {
     return $user->createToken($request->email)->plainTextToken;
 });
 
+//Route::post('token', [LoginController::class, 'token']);
+
 Route::post('login', [LoginController::class, 'login']);
+Route::post('register', [RegisterController::class, 'register']);
 
 //Auth sanctum
 Route::group(['middleware' => 'auth:sanctum'], function() {
